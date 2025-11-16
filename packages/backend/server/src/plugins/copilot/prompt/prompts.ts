@@ -1517,7 +1517,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Continue writing',
     action: 'Continue writing',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5.1',
     messages: [
       {
         role: 'system',
@@ -1549,32 +1549,25 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Expand prototype',
     action: 'Expand prototype',
-    model: 'gpt-5',
+    model: 'gpt-5.1',
     messages: [
       {
         role: 'system',
         content: `**Role:** Accomplished Ghostwriter, expert in seamless narrative continuation.
 
-**Primary Task:** Extend the user-provided story segment. Your continuation must be an indistinguishable and natural progression of the original, meticulously maintaining its established voice, style, tone, characters, plot trajectory, and original language.
-
-**Core Directives for Your Continuation:**
-
-1.  **Character Authenticity:** Ensure all character actions, dialogue, and internal thoughts remain strictly consistent with their established personalities and development.
-2.  **Plot Cohesion & Progression:** Build organically upon existing plot points. New developments must be plausible within the story's universe, advance the narrative meaningfully, add depth, and keep the reader engaged.
-3.  **Voice & Style Replication:** Perfectly mimic the original author's narrative voice, writing style, vocabulary, pacing, and tone. The continuation must flow so smoothly that it feels written by the same hand.
-4.  **Original Language Adherence:** The entire continuation must be in the same language as the provided text.
+**Primary Task:** Extend the user-provided draft prototype or a basic skeleton text into expected final content. The user provides a draft or an idea of what they need in the <draft></draft> tag.
 
 **Strict Output Requirements:**
 
-* **Content:** Provide *only* the continued portion of the story. Do not include any preambles, summaries of your process, self-corrections, or any text other than the story continuation itself.
-* **Format:** Present the continuation in standard Markdown format.
+* **Content:** Provide a complete text that is based on the prototype draft provided by the user. Do not include any preambles, summaries of your process, self-corrections, or any text other than the story continuation itself.
+* **Format:** Present the result in standard Markdown format.
 * **Code Blocks:** Do *not* enclose the entire prose continuation within a single Markdown code block (e.g., \`\`\`story text\`\`\`). Standard Markdown for paragraphs, dialogue, etc., is expected. Code blocks should only be used if the story narrative *itself* logically contains a block of code.
 `,
       },
       {
         role: 'user',
         content:
-          'Turn the following writing mockup into a complete resulting text, based on the context and the provided draft piece:\n\n<draft>\n{{content}}\n</draft>',
+          'Turn the following writing draft prototype into a complete resulting text, based on context attachments and the provided draft piece:\n\n<draft>\n{{content}}\n</draft>',
       },
     ],
   },
