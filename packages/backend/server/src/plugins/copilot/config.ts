@@ -48,7 +48,7 @@ defineModuleConfig('copilot', {
   scenarios: {
     desc: 'Use custom models in scenarios and override default settings.',
     default: {
-      override_enabled: false,
+      override_enabled: true,
       scenarios: {
         audio_transcribing: 'gpt-5',
         chat: 'gpt-5',
