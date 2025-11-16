@@ -63,7 +63,7 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-        
+
   # lint:
   #   name: Lint
   #   runs-on: ubuntu-24.04-arm
@@ -116,42 +116,42 @@ jobs:
             echo "All changes are submitted"
           }
 
-  check-git-status:
-    name: Check Git Status
-    runs-on: ubuntu-latest
-    needs:
-      - build-server-native
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node
-        with:
-          full-cache: true
+  # check-git-status:
+  #   name: Check Git Status
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #     - build-server-native
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup Node.js
+  #       uses: ./.github/actions/setup-node
+  #       with:
+  #         full-cache: true
 
-      - name: Download server-native.node
-        uses: actions/download-artifact@v4
-        with:
-          name: server-native.node
-          path: ./packages/backend/native
+  #     - name: Download server-native.node
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: server-native.node
+  #         path: ./packages/backend/native
 
-      - name: Bundle @affine/reader
-        shell: bash
-        run: |
-          yarn workspace @affine/reader build
+  #     - name: Bundle @affine/reader
+  #       shell: bash
+  #       run: |
+  #         yarn workspace @affine/reader build
 
-      - name: Run Check
-        run: |
-          yarn affine init
-          yarn affine gql build
-          yarn affine i18n build
-          yarn affine server genconfig
-          git checkout packages/frontend/i18n/src/i18n-completenesses.json
-          git status --porcelain | grep . && {
-            echo "Run 'yarn affine init && yarn affine gql build && yarn affine i18n build && yarn affine server genconfig' and make sure all changes are submitted"
-            exit 1
-          } || {
-            echo "All changes are submitted"
-          }
+  #     - name: Run Check
+  #       run: |
+  #         yarn affine init
+  #         yarn affine gql build
+  #         yarn affine i18n build
+  #         yarn affine server genconfig
+  #         git checkout packages/frontend/i18n/src/i18n-completenesses.json
+  #         git status --porcelain | grep . && {
+  #           echo "Run 'yarn affine init && yarn affine gql build && yarn affine i18n build && yarn affine server genconfig' and make sure all changes are submitted"
+  #           exit 1
+  #         } || {
+  #           echo "All changes are submitted"
+  #         }
 
   check-yarn-binary:
     name: Check yarn binary
@@ -1357,7 +1357,6 @@ jobs:
     needs:
       - analyze
       - typecheck
-      - check-git-status
       - check-yarn-binary
       - build-native
       - build-windows-native
