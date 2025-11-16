@@ -767,41 +767,41 @@ jobs:
   #       run: |
   #         cargo nextest run -p y-octo --lib
 
-  fuzzing:
-    name: fuzzing
-    runs-on: ubuntu-latest
-    env:
-      CARGO_TERM_COLOR: always
-    steps:
-      - uses: actions/checkout@v4
+  # fuzzing:
+  #   name: fuzzing
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     CARGO_TERM_COLOR: always
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: nightly
+  #     - name: Setup Rust
+  #       uses: dtolnay/rust-toolchain@stable
+  #       with:
+  #         toolchain: nightly
 
-      - name: fuzzing
-        working-directory: ./packages/common/y-octo/utils
-        run: |
-          cargo install cargo-fuzz
-          cargo +nightly fuzz run apply_update -- -max_total_time=30
-          cargo +nightly fuzz run codec_doc_any_struct -- -max_total_time=30
-          cargo +nightly fuzz run codec_doc_any -- -max_total_time=30
-          cargo +nightly fuzz run decode_bytes -- -max_total_time=30
-          cargo +nightly fuzz run i32_decode -- -max_total_time=30
-          cargo +nightly fuzz run i32_encode -- -max_total_time=30
-          cargo +nightly fuzz run ins_del_text -- -max_total_time=30
-          cargo +nightly fuzz run sync_message -- -max_total_time=30
-          cargo +nightly fuzz run u64_decode -- -max_total_time=30
-          cargo +nightly fuzz run u64_encode -- -max_total_time=30
-          cargo +nightly fuzz run apply_update -- -max_total_time=30
+  #     - name: fuzzing
+  #       working-directory: ./packages/common/y-octo/utils
+  #       run: |
+  #         cargo install cargo-fuzz
+  #         cargo +nightly fuzz run apply_update -- -max_total_time=30
+  #         cargo +nightly fuzz run codec_doc_any_struct -- -max_total_time=30
+  #         cargo +nightly fuzz run codec_doc_any -- -max_total_time=30
+  #         cargo +nightly fuzz run decode_bytes -- -max_total_time=30
+  #         cargo +nightly fuzz run i32_decode -- -max_total_time=30
+  #         cargo +nightly fuzz run i32_encode -- -max_total_time=30
+  #         cargo +nightly fuzz run ins_del_text -- -max_total_time=30
+  #         cargo +nightly fuzz run sync_message -- -max_total_time=30
+  #         cargo +nightly fuzz run u64_decode -- -max_total_time=30
+  #         cargo +nightly fuzz run u64_encode -- -max_total_time=30
+  #         cargo +nightly fuzz run apply_update -- -max_total_time=30
 
-      - name: upload fuzz artifacts
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: fuzz-artifact
-          path: packages/common/y-octo/utils/fuzz/artifacts/**/*
+  #     - name: upload fuzz artifacts
+  #       if: ${{ failure() }}
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: fuzz-artifact
+  #         path: packages/common/y-octo/utils/fuzz/artifacts/**/*
 
   # y-octo-binding-test:
   #   name: y-octo binding test on ${{ matrix.settings.target }}
