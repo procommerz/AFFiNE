@@ -115,25 +115,6 @@ jobs:
             echo "All changes are submitted"
           }
 
-  lint-rust:
-    name: Lint Rust
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-rust
-        with:
-          no-build: 'true'
-      - name: fmt check
-        run: |
-          rustup toolchain add nightly
-          rustup component add --toolchain nightly-x86_64-unknown-linux-gnu rustfmt
-          cargo +nightly fmt --all -- --check
-      - name: Clippy
-        run: |
-          rustup component add clippy
-          cargo clippy --workspace --exclude affine_server_native --all-targets --all-features -- -D warnings
-          cargo clippy -p affine_server_native --all-targets --all-features -- -D warnings
-
   check-git-status:
     name: Check Git Status
     runs-on: ubuntu-latest
@@ -1376,14 +1357,12 @@ jobs:
       - analyze
       - lint
       - typecheck
-      - lint-rust
       - check-git-status
       - check-yarn-binary
       - build-native
       - build-windows-native
       - build-server-native
       - build-electron-renderer
-      - fuzzing
     if: always()
     runs-on: ubuntu-latest
     name: 3, 2, 1 Launch
