@@ -30,7 +30,7 @@ export const promptKeys = [
   'Make it longer',
   'Make it shorter',
   'Continue writing',
-  'Expand writing',
+  'Expand prototype',
   // image actions
   'Generate image',
   'Convert to Anime style',

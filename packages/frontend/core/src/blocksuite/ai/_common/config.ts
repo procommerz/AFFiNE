@@ -191,6 +191,13 @@ const EditTextAIGroup: AIItemGroupConfig = {
       showWhen: textBlockShowWhen,
       handler: actionToHandler('continueWriting', AIPenIconWithAnimation),
     },
+    {
+      name: 'Expand prototype',
+      testId: 'action-expand-prototype',
+      icon: PenIcon(),
+      showWhen: textBlockShowWhen,
+      handler: actionToHandler('expandPrototype', AIPenIconWithAnimation),
+    },
   ],
 };
 

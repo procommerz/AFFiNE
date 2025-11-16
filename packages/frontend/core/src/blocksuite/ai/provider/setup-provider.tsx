@@ -578,6 +578,19 @@ Could you make a new website based on these notes and send back just the html fi
       content: options.input,
     });
   });
+
+  AIProvider.provide('expandPrototype', async options => {
+    const sessionId = await createSession({
+      promptName: 'Expand prototype',
+      ...options,
+    });
+    return textToText({
+      ...options,
+      client,
+      sessionId,
+      content: options.input,
+    });
+  });
   //#endregion
 
   AIProvider.provide('session', {

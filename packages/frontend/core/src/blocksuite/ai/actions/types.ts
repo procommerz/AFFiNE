@@ -199,7 +199,7 @@ declare global {
       continueWriting<T extends AITextActionOptions>(
         options: T
       ): Promise<AIActionTextResponse<T>>;
-      expandWriting<T extends AITextActionOptions>(
+      expandPrototype<T extends AITextActionOptions>(
         options: T
       ): Promise<AIActionTextResponse<T>>;
       checkCodeErrors<T extends AITextActionOptions>(

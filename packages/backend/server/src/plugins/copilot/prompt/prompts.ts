@@ -64,7 +64,7 @@ export const Scenario = {
   quick_text_generation: [
     'Brainstorm ideas about this',
     'Continue writing',
-    'Expand writing',
+    'Expand prototype',
     'Explain this code',
     'Fix spelling for it',
     'Improve writing for it',
