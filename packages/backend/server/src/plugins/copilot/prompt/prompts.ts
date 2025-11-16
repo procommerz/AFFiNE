@@ -1517,7 +1517,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Continue writing',
     action: 'Continue writing',
-    model: 'gpt-5.1',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -1549,7 +1549,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Expand prototype',
     action: 'Expand prototype',
-    model: 'gpt-5.1',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',

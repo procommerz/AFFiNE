@@ -431,6 +431,9 @@ export class EditorUtils {
       continueWriting: this.createAction(page, () =>
         page.getByTestId('action-continue-writing').click()
       ),
+      expandPrototype: this.createAction(page, () =>
+        page.getByTestId('action-expand-prototype').click()
+      ),
       createHeadings: this.createAction(page, () =>
         page.getByTestId('action-create-headings').click()
       ),
@@ -606,6 +609,9 @@ export class EditorUtils {
       continueWithAi: () => page.getByTestId('action-continue-with-ai').click(),
       continueWriting: this.createAction(page, () =>
         page.getByTestId('action-continue-writing').click()
+      ),
+      expandPrototype: this.createAction(page, () =>
+        page.getByTestId('action-expand-prototype').click()
       ),
       createHeadings: this.createAction(page, () =>
         page.getByTestId('action-create-headings').click()
