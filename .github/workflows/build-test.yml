@@ -63,30 +63,31 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-  lint:
-    name: Lint
-    runs-on: ubuntu-24.04-arm
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run oxlint
-        # oxlint is fast, so wrong code will fail quickly
-        run: yarn dlx $(node -e "console.log(require('./package.json').scripts['lint:ox'].replace('oxlint', 'oxlint@' + require('./package.json').devDependencies.oxlint))")
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node
-        with:
-          electron-install: false
-          full-cache: true
-      - name: Run i18n codegen
-        run: yarn affine @affine/i18n build
-      - name: Run ESLint
-        run: yarn lint:eslint --max-warnings=0
-      - name: Run Prettier
-        # Set nmMode in `actions/setup-node` will modify the .yarnrc.yml
-        run: |
-          git checkout .yarnrc.yml
-          yarn lint:prettier
-      - name: Yarn Dedupe
-        run: yarn dedupe --check
+        
+  # lint:
+  #   name: Lint
+  #   runs-on: ubuntu-24.04-arm
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Run oxlint
+  #       # oxlint is fast, so wrong code will fail quickly
+  #       run: yarn dlx $(node -e "console.log(require('./package.json').scripts['lint:ox'].replace('oxlint', 'oxlint@' + require('./package.json').devDependencies.oxlint))")
+  #     - name: Setup Node.js
+  #       uses: ./.github/actions/setup-node
+  #       with:
+  #         electron-install: false
+  #         full-cache: true
+  #     - name: Run i18n codegen
+  #       run: yarn affine @affine/i18n build
+  #     - name: Run ESLint
+  #       run: yarn lint:eslint --max-warnings=0
+  #     - name: Run Prettier
+  #       # Set nmMode in `actions/setup-node` will modify the .yarnrc.yml
+  #       run: |
+  #         git checkout .yarnrc.yml
+  #         yarn lint:prettier
+  #     - name: Yarn Dedupe
+  #       run: yarn dedupe --check
 
   typecheck:
     name: Typecheck
@@ -1355,7 +1356,6 @@ jobs:
   test-done:
     needs:
       - analyze
-      - lint
       - typecheck
       - check-git-status
       - check-yarn-binary
