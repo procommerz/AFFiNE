@@ -40,6 +40,7 @@ const icons: Record<string, TemplateResult<1>> = {
   'Make it longer': LongerIcon(),
   'Make it shorter': ShorterIcon(),
   'Continue writing': PenIcon(),
+  'Expand writing': PenIcon(),
   'Make it real': MakeItRealIcon(),
   'Find action items from it': SearchIcon(),
   Summary: PenIcon(),

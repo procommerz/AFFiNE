@@ -231,7 +231,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           registry-url: https://npm.pkg.github.com
-          scope: '@toeverything'
+          scope: '@procommerz'
 
       - name: Download web artifact
         uses: actions/download-artifact@v4
@@ -277,7 +277,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           provenance: true
           file: .github/deployment/front/Dockerfile
-          tags: ghcr.io/toeverything/affine-front:${{inputs.build-type}}-${{ inputs.git-short-hash }}
+          tags: ghcr.io/procommerz/affine-front:${{inputs.build-type}}-${{ inputs.git-short-hash }}
 
       - name: Build graphql Dockerfile
         uses: docker/build-push-action@v6
@@ -288,4 +288,4 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           provenance: true
           file: .github/deployment/node/Dockerfile
-          tags: ghcr.io/toeverything/affine:${{inputs.build-type}}-${{ inputs.git-short-hash }}
+          tags: ghcr.io/procommerz/affine:${{inputs.build-type}}-${{ inputs.git-short-hash }}
