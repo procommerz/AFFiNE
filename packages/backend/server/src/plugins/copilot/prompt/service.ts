@@ -120,10 +120,14 @@ export class PromptService implements OnApplicationBootstrap {
     // skip cache in dev mode to ensure the latest prompt is always fetched
     if (!env.dev) {
       const cached = this.cache.get(name);
-      if (cached) return cached;
+      if (cached) {
+        this.logger.log(`Prompt: ${name} found in cache`);
+        return cached;
+      }
     }
 
-    const prompt = await this.db.aiPrompt.findUnique({
+    this.logger.log(`prompt: ${name} not found in cache, fetching from db`);
+    let prompt = await this.db.aiPrompt.findUnique({
       where: {
         name,
       },
@@ -145,6 +149,11 @@ export class PromptService implements OnApplicationBootstrap {
         },
       },
     });
+
+    if (!prompt) {
+      prompt = prompts.find(p => p.name === name) as any;
+      this.logger.log(`prompt get: ${name} not found in db, using prompt from prompts.ts`);
+    }
 
     const messages = PromptMessageSchema.array().safeParse(prompt?.messages);
     const config = PromptConfigSchema.safeParse(prompt?.config);
@@ -232,9 +241,7 @@ export class PromptService implements OnApplicationBootstrap {
 
       this.cache.delete(name);
     } else if (model && !existing) {
-      this.logger.error(`Prompt: ${name} not found in db and model is provided: ${model}`);
-      // this.logger.log(`Creating prompt: ${name} with model: ${model}`);
-      // await this.set(name, model, messages || [], config || undefined);
+      this.logger.error(`prompt update: ${name} not found in db, model: ${model}`);      
     }
   }
 
