@@ -100,6 +100,17 @@ export class PromptService implements OnApplicationBootstrap {
     });
   }
 
+  async listShort() {
+    return this.db.aiPrompt.findMany({
+      select: {
+        name: true,
+        action: true,
+        model: true,
+      },
+      orderBy: { action: { sort: 'asc', nulls: 'first' } },
+    });
+  }
+
   /**
    * get prompt messages by prompt name
    * @param name prompt name

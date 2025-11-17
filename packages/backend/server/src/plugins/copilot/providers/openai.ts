@@ -218,6 +218,34 @@ export class OpenAIProvider extends CopilotProvider<OpenAIConfig> {
       ],
     },
     {
+      name: 'GPT 5.1',
+      id: 'gpt-5.1',
+      capabilities: [
+        {
+          input: [ModelInputType.Text, ModelInputType.Image],
+          output: [
+            ModelOutputType.Text,
+            ModelOutputType.Object,
+            ModelOutputType.Structured,
+          ],
+        },
+      ],
+    },
+    {
+      name: 'GPT 5',
+      id: 'gpt-5',
+      capabilities: [
+        {
+          input: [ModelInputType.Text, ModelInputType.Image],
+          output: [
+            ModelOutputType.Text,
+            ModelOutputType.Object,
+            ModelOutputType.Structured,
+          ],
+        },
+      ],
+    },
+    {
       name: 'GPT 5 Mini',
       id: 'gpt-5-mini',
       capabilities: [

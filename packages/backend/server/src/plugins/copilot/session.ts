@@ -465,6 +465,7 @@ export class ChatSessionService {
     const prompt = await this.prompt.get(options.promptName);
     if (!prompt) {
       this.logger.error(`Prompt not found: ${options.promptName}`);
+      this.logger.error(`Prompts: ${JSON.stringify(await this.prompt.listShort())}\n\n----------------------------------`);
       throw new CopilotPromptNotFound({ name: options.promptName });
     }
 
