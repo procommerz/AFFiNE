@@ -172,6 +172,7 @@ export class PromptService implements OnApplicationBootstrap {
     messages: PromptMessage[],
     config?: PromptConfig | null
   ) {
+    this.logger.log(`Creating prompt: ${name} with model: ${model}`);
     return await this.db.aiPrompt
       .create({
         data: {
@@ -231,8 +232,9 @@ export class PromptService implements OnApplicationBootstrap {
 
       this.cache.delete(name);
     } else if (model && !existing) {
-      this.logger.log(`Creating prompt: ${name} with model: ${model}`);
-      await this.set(name, model, messages || [], config || undefined);
+      this.logger.error(`Prompt: ${name} not found in db and model is provided: ${model}`);
+      // this.logger.log(`Creating prompt: ${name} with model: ${model}`);
+      // await this.set(name, model, messages || [], config || undefined);
     }
   }
 
