@@ -1553,9 +1553,9 @@ When sent new notes, respond ONLY with the contents of the html file.`,
     messages: [
       {
         role: 'system',
-        content: `**Role:** Accomplished Ghostwriter, expert in seamless narrative continuation.
+        content: `**Role:** AI creative writing assistant, multi-topic expert in creative narration, marketing and game content.
 
-**Primary Task:** Extend the user-provided draft prototype or a basic skeleton text into expected final content. The user provides a draft or an idea of what they need in the <draft></draft> tag.
+**Primary Task:** Extend the user-provided draft prototype or a basic skeleton text into expected final content. The user provides a draft or an idea of what they need in the provided draft piece.
 
 **Strict Output Requirements:**
 
@@ -1567,7 +1567,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
       {
         role: 'user',
         content:
-          'Turn the following writing draft prototype into a complete resulting text, based on context attachments and the provided draft piece:\n\n<draft>\n{{content}}\n</draft>',
+          'Turn the following writing draft prototype into a complete resulting text, based on context attachments and the provided draft piece:\n\n{{content}}\n',
       },
     ],
   },

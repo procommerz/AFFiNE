@@ -59,7 +59,7 @@ export class PromptService implements OnApplicationBootstrap {
               prompt.name,
               { model, modified: true },
               { model: { not: model } }
-            );
+            );          
           } else {
             this.logger.log(`Prompt: ${name} not found or model is not provided`);
           }
@@ -156,6 +156,12 @@ export class PromptService implements OnApplicationBootstrap {
       });
       this.cache.set(name, chatPrompt);
       return chatPrompt;
+    } else {
+      this.logger.error(`prompt: ${name} not added: ${JSON.stringify(prompt)}`);
+      this.logger.error(`prompt Messages: ${JSON.stringify(messages)}`);
+      this.logger.error(`prompt Config: ${JSON.stringify(config)}`);
+      this.logger.error(`prompt Messages success: ${messages.success}`);
+      this.logger.error(`prompt Config success: ${config.success}`);
     }
     return null;
   }
@@ -224,6 +230,9 @@ export class PromptService implements OnApplicationBootstrap {
       });
 
       this.cache.delete(name);
+    } else if (model && !existing) {
+      this.logger.log(`Creating prompt: ${name} with model: ${model}`);
+      await this.set(name, model, messages || [], config || undefined);
     }
   }
 
