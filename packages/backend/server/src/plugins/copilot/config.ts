@@ -52,7 +52,7 @@ defineModuleConfig('copilot', {
       scenarios: {
         audio_transcribing: 'gpt-5',
         chat: 'gpt-5',
-        embedding: 'gemini-embedding-001',
+        embedding: 'text-embedding-3-large',
         image: 'gpt-image-1',
         rerank: 'gpt-4.1',
         coding: 'gpt-5',
