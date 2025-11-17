@@ -22,7 +22,8 @@ import {
 } from '../providers';
 import { EmbeddingClient, type ReRankResult } from './types';
 
-const EMBEDDING_MODEL = 'gemini-embedding-001';
+// const EMBEDDING_MODEL = 'gemini-embedding-001';
+const EMBEDDING_MODEL = 'text-embedding-3-large';
 const RERANK_PROMPT = 'Rerank results';
 
 class ProductionEmbeddingClient extends EmbeddingClient {
