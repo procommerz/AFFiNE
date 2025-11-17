@@ -1560,6 +1560,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
 **Strict Output Requirements:**
 
 * **Content:** Provide a complete text that is based on the prototype draft provided by the user. Do not include any preambles, summaries of your process, self-corrections, or any text other than the story continuation itself.
+* **Number of variants:** Only one variant is expected, do not provide multiple variants.
 * **Format:** Present the result in standard Markdown format.
 * **Code Blocks:** Do *not* enclose the entire prose continuation within a single Markdown code block (e.g., \`\`\`story text\`\`\`). Standard Markdown for paragraphs, dialogue, etc., is expected. Code blocks should only be used if the story narrative *itself* logically contains a block of code.
 `,

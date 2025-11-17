@@ -53,14 +53,16 @@ export const Component = ({
   const loggedIn = useLiveData(
     authService.session.status$.map(s => s === 'authenticated')
   );
-  const enableLocalWorkspace =
-    useLiveData(
-      defaultServerService.server.config$.selector(
-        c =>
-          c.features.includes(ServerFeature.LocalWorkspace) ||
-          BUILD_CONFIG.isNative
-      )
-    ) ?? true;
+  // const enableLocalWorkspace =
+  //   useLiveData(
+  //     defaultServerService.server.config$.selector(
+  //       c =>
+  //         c.features.includes(ServerFeature.LocalWorkspace) ||
+  //         BUILD_CONFIG.isNative
+  //     )
+  //   ) ?? true;
+
+  const enableLocalWorkspace = false;
 
   const workspacesService = useService(WorkspacesService);
   const list = useLiveData(workspacesService.list.workspaces$);

@@ -78,6 +78,6 @@ defineModuleConfig('flags', {
   },
   allowGuestDemoWorkspace: {
     desc: 'Whether allow guest users to create demo workspaces.',
-    default: true,
+    default: false,
   },
 });

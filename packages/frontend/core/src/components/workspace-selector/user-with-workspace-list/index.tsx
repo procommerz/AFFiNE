@@ -75,11 +75,12 @@ export const UserWithWorkspaceList = ({
   }, [globalDialogService]);
 
   const onNewWorkspace = useCallback(() => {
-    const enableLocalWorkspace =
-      BUILD_CONFIG.isNative ||
-      defaultServerService.server.config$.value.features.includes(
-        ServerFeature.LocalWorkspace
-      );
+    // const enableLocalWorkspace =
+    //   BUILD_CONFIG.isNative ||
+    //   defaultServerService.server.config$.value.features.includes(
+    //     ServerFeature.LocalWorkspace
+    //   );
+    const enableLocalWorkspace = false;
     if (!isAuthenticated && !enableLocalWorkspace) {
       return openSignInModal();
     }

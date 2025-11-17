@@ -16,13 +16,15 @@ export const AddWorkspace = ({
 }) => {
   const t = useI18n();
   const defaultServerService = useService(DefaultServerService);
-  const enableLocalWorkspace = useLiveData(
-    defaultServerService.server.config$.selector(
-      c =>
-        c.features.includes(ServerFeature.LocalWorkspace) ||
-        BUILD_CONFIG.isNative
-    )
-  );
+  // const enableLocalWorkspace = useLiveData(
+  //   defaultServerService.server.config$.selector(
+  //     c =>
+  //       c.features.includes(ServerFeature.LocalWorkspace) ||
+  //       BUILD_CONFIG.isNative
+  //   )
+  // );
+
+  const enableLocalWorkspace = false;
 
   return (
     <>

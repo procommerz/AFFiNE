@@ -22,7 +22,7 @@ export const RootWrapper = () => {
       .then(() => setIsServerReady(true))
       .catch(console.error);
     return () => abortController.abort();
-  }, [defaultServerService, isServerReady]);
+  }, [defaultServerService, isServerReady]);  
 
   return (
     <FrameworkScope scope={defaultServerService.server.scope}>
