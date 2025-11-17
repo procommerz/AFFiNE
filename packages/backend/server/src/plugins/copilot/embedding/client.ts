@@ -57,6 +57,7 @@ class ProductionEmbeddingClient extends EmbeddingClient {
   ): Promise<CopilotProvider> {
     const provider = await this.providerFactory.getProvider(cond);
     if (!provider) {
+      this.logger.warn(`Provider ${cond.modelId} not found: ${JSON.stringify(cond)}`);
       throw new CopilotProviderNotSupported({
         provider: 'embedding',
         kind: cond.outputType || 'embedding',
