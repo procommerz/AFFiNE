@@ -4,9 +4,10 @@ import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import { useState } from 'react';
 
 import { Header } from '../header';
+import { Prompts } from './prompts';
 
 function AiPage() {
-  const [enableAi, setEnableAi] = useState(false);
+  const [enableAi, setEnableAi] = useState(true);
 
   return (
     <div className="h-screen flex-1 flex-col flex">
@@ -32,7 +33,7 @@ function AiPage() {
               />
             </div>
           </div>
-          {/* <Prompts /> */}
+          <Prompts />
         </ScrollAreaPrimitive.Viewport>
         <ScrollAreaPrimitive.ScrollAreaScrollbar
           className={cn(

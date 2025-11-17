@@ -2145,11 +2145,17 @@ export async function refreshPrompts(db: PrismaClient) {
     })
     .then(p => p.map(p => p.name));
 
+  new Logger('CopilotPrompt').log(`prompts refresh: need to skip prompts: ${needToSkip.join(', ')}`);
+
   for (const prompt of prompts) {
     // skip prompt update if already modified by admin panel
     if (needToSkip.includes(prompt.name)) {
       new Logger('CopilotPrompt').warn(`Skip modified prompt: ${prompt.name}`);
       return;
+    }
+
+    if (prompt.name == "Expand prototype") {
+      new Logger('CopilotPrompt').log(`prompts refresh (!): Expand prototype: PRESENT`);
     }
 
     await db.aiPrompt.upsert({
@@ -2186,6 +2192,10 @@ export async function refreshPrompts(db: PrismaClient) {
         },
       },
     });
+
+    if (prompt.name == "Expand prototype") {
+      new Logger('CopilotPrompt').log(`prompts refresh (!): Expand prototype: UPSERT OK`);
+    }
 
     await db.aiSession.updateMany({
       where: {

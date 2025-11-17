@@ -150,11 +150,6 @@ export class PromptService implements OnApplicationBootstrap {
       },
     });
 
-    if (!prompt) {
-      prompt = prompts.find(p => p.name === name) as any;
-      this.logger.log(`prompt get: ${name} not found in db, using prompt from prompts.ts`);
-    }
-
     const messages = PromptMessageSchema.array().safeParse(prompt?.messages);
     const config = PromptConfigSchema.safeParse(prompt?.config);
     if (prompt && messages.success && config.success) {
