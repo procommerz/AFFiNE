@@ -48,7 +48,6 @@ export class PromptService implements OnApplicationBootstrap {
     if (!!scenarios && scenarios.override_enabled && scenarios.scenarios) {
       this.logger.log('Updating prompts based on scenarios...');
       for (const [scenario, model] of Object.entries(scenarios.scenarios)) {
-        this.logger.log(`Updating prompt scenario: ${scenario} to model: ${model}`);
         const promptNames = Scenario[scenario as keyof typeof Scenario] || [];
         if (!promptNames.length) continue;
         for (const name of promptNames) {
@@ -126,7 +125,6 @@ export class PromptService implements OnApplicationBootstrap {
       }
     }
 
-    this.logger.log(`prompt: ${name} not found in cache, fetching from db`);
     let prompt = await this.db.aiPrompt.findUnique({
       where: {
         name,
