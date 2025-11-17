@@ -48,16 +48,20 @@ export class PromptService implements OnApplicationBootstrap {
     if (!!scenarios && scenarios.override_enabled && scenarios.scenarios) {
       this.logger.log('Updating prompts based on scenarios...');
       for (const [scenario, model] of Object.entries(scenarios.scenarios)) {
+        this.logger.log(`Updating prompt scenario: ${scenario} to model: ${model}`);
         const promptNames = Scenario[scenario as keyof typeof Scenario] || [];
         if (!promptNames.length) continue;
         for (const name of promptNames) {
           const prompt = prompts.find(p => p.name === name);
           if (prompt && model) {
+            this.logger.log(`Updating prompt: ${name} to model: ${model}`);
             await this.update(
               prompt.name,
               { model, modified: true },
               { model: { not: model } }
             );
+          } else {
+            this.logger.log(`Prompt: ${name} not found or model is not provided`);
           }
         }
       }
