@@ -30,8 +30,8 @@ import {
   createDocReadTool,
   createDocSemanticSearchTool,
   createExaCrawlTool,
-  createExaSearchTool,
   createSectionEditTool,
+  createOpenAiSearchTool
 } from '../tools';
 import { CopilotProviderFactory } from './factory';
 import {
@@ -245,7 +245,7 @@ export abstract class CopilotProvider<C = any> {
             break;
           }
           case 'webSearch': {
-            tools.web_search_exa = createExaSearchTool(this.AFFiNEConfig);
+            tools.web_search_exa = createOpenAiSearchTool(this.AFFiNEConfig);
             tools.web_crawl_exa = createExaCrawlTool(this.AFFiNEConfig);
             break;
           }
