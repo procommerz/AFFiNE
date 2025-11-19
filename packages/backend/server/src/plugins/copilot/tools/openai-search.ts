@@ -45,6 +45,12 @@ export const createOpenAiSearchTool = (config: Config) => {
 
         const body = await response.json() as any;
 
+        if (!body.output) {
+          new Logger('OpenAiSearchTool').error(`🔴 OpenAI Search Failed: No output from API`);
+          new Logger('OpenAiSearchTool').error(`🔴 OpenAI Failed Response: ${JSON.stringify(body)}`);
+          return toolError('OpenAi Search Failed', 'No output from API');
+        }
+
         const resultsJson = body.output[body.output.length - 1].content[0].text;
         const results = JSON.parse(resultsJson);
         
