@@ -19,7 +19,7 @@ export const createOpenAiSearchTool = (config: Config) => {
       try {
         const apiKey = config.copilot.providers.openai.apiKey;              
 
-        new Logger('OpenAiSearchTool').log(`Performing GPT web search for query: ${query}`);
+        new Logger('OpenAiSearchTool').log(`Performing GPT web search for query: ${query}. Key present: ${!!apiKey}`);
 
         if (!apiKey) {
           new Logger('OpenAiSearchTool').error('🔴 OpenAI API key is not set for web search');
@@ -72,6 +72,7 @@ export const createOpenAiSearchTool = (config: Config) => {
           author: data.author,
         }));
       } catch (e: any) {
+        new Logger('OpenAiSearchTool').error(`🔴 OpenAI Search Failed: ${e.message}`);
         return toolError('OpenAi Search Failed', e.message);
       }
     },

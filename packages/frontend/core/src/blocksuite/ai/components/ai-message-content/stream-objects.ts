@@ -88,6 +88,13 @@ export class ChatContentStreamObjects extends WithDisposable(
             .width=${this.width}
           ></web-search-tool>
         `;
+      case 'web_search_gpt':
+        return html`
+          <web-search-tool
+            .data=${streamObject}
+            .width=${this.width}
+          ></web-search-tool>
+        `;
       case 'doc_compose':
         return html`
           <doc-compose-tool
@@ -172,6 +179,13 @@ export class ChatContentStreamObjects extends WithDisposable(
             .width=${this.width}
           ></web-search-tool>
         `;
+      case 'web_search_gpt':
+          return html`
+            <web-search-tool
+              .data=${streamObject}
+              .width=${this.width}
+            ></web-search-tool>
+          `;
       case 'doc_compose':
         return html`
           <doc-compose-tool
