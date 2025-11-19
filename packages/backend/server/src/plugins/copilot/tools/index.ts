@@ -24,7 +24,7 @@ export interface CustomAITools extends ToolSet {
   doc_compose: ReturnType<typeof createDocComposeTool>;
   section_edit: ReturnType<typeof createSectionEditTool>;
   web_search_exa: ReturnType<typeof createOpenAiSearchTool>;
-  web_crawl_exa: ReturnType<typeof createExaCrawlTool>;
+  // web_crawl_exa: ReturnType<typeof createExaCrawlTool>;
 }
 
 export * from './blob-read';

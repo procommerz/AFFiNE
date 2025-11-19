@@ -8,9 +8,9 @@ import { Logger } from '@nestjs/common';
 
 export const createOpenAiSearchTool = (config: Config) => {
   return tool({
-    description: 'Search the web for information',
+    description: 'Search the web for information, returns 10 results with URLS and short summaries',
     inputSchema: z.object({
-      query: z.string().describe('The query to search the web for.'),
+      query: z.string().describe('The query to search the web for (some context notes can be provided too)'),
       mode: z
         .enum(['MUST', 'AUTO'])
         .describe('The mode to search the web for.'),
@@ -18,6 +18,13 @@ export const createOpenAiSearchTool = (config: Config) => {
     execute: async ({ query, mode }) => {
       try {
         const apiKey = config.copilot.providers.openai.apiKey;              
+
+        new Logger('OpenAiSearchTool').log(`Performing GPT web search for query: ${query}`);
+
+        if (!apiKey) {
+          new Logger('OpenAiSearchTool').error('🔴 OpenAI API key is not set for web search');
+          return toolError('OpenAi Search Failed', 'API key is not set');
+        }
         
         const response = await fetch(`https://api.openai.com/v1/responses`, {
           method: 'POST',
@@ -41,6 +48,8 @@ export const createOpenAiSearchTool = (config: Config) => {
         const resultsJson = body.output[body.output.length - 1].content[0].text;
         const results = JSON.parse(resultsJson);
         
+        new Logger('OpenAiSearchTool').log(`GPT web search results: ${results.length}`);
+
         // The result should have a shape like this:
         // {
         //   "results": [

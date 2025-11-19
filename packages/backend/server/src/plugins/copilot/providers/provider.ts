@@ -246,7 +246,7 @@ export abstract class CopilotProvider<C = any> {
           }
           case 'webSearch': {
             tools.web_search_exa = createOpenAiSearchTool(this.AFFiNEConfig);
-            tools.web_crawl_exa = createExaCrawlTool(this.AFFiNEConfig);
+            // tools.web_crawl_exa = createExaCrawlTool(this.AFFiNEConfig);
             break;
           }
           case 'docCompose': {
