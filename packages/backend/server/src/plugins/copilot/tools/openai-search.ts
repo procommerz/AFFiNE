@@ -29,6 +29,7 @@ export const createOpenAiSearchTool = (config: Config) => {
         const response = await fetch(`https://api.openai.com/v1/responses`, {
           method: 'POST',
           headers: {
+            'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Accept-Encoding': 'gzip',
             'Authorization': 'Bearer ' + apiKey,
