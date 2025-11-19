@@ -20,7 +20,7 @@ export const createOpenAiSearchTool = (config: Config) => {
         const apiKey = config.copilot.providers.openai.apiKey;              
         
         const response = await fetch(`https://api.openai.com/v1/responses`, {
-          method: 'get',
+          method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Accept-Encoding': 'gzip',
@@ -36,14 +36,25 @@ export const createOpenAiSearchTool = (config: Config) => {
           }),
         });
 
-        const body = await response.json();
+        const body = await response.json() as any;
 
-        new Logger('OpenAiSearchTool').log(body);
+        const resultsJson = body.output[body.output.length - 1].content[0].text;
+        const results = JSON.parse(resultsJson);
         
-        // Get the response text:
-        
-        
-        return (body as any).results.map((data: any) => ({
+        // The result should have a shape like this:
+        // {
+        //   "results": [
+        //     {
+        //       "title": "string",
+        //       "url": "string",
+        //       "content": "string",
+        //       "publishedDate": "string",
+        //       "author": "string"
+        //     }
+        //   ]
+        // }
+                
+        return results.map((data: any) => ({
           title: data.title,
           url: data.url,
           content: data.summary,
