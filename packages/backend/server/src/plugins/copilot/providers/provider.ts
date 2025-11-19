@@ -31,7 +31,8 @@ import {
   createDocSemanticSearchTool,
   createExaCrawlTool,
   createSectionEditTool,
-  createOpenAiSearchTool
+  createOpenAiSearchTool,
+  createExaSearchTool
 } from '../tools';
 import { CopilotProviderFactory } from './factory';
 import {
@@ -51,6 +52,7 @@ import {
   PromptMessageSchema,
   StreamObject,
 } from './types';
+import { createWebSearchTool } from '../tools/web-search';
 
 @Injectable()
 export abstract class CopilotProvider<C = any> {
@@ -245,9 +247,7 @@ export abstract class CopilotProvider<C = any> {
             break;
           }
           case 'webSearch': {
-            // tools.web_search_exa = createExaSearchTool(this.AFFiNEConfig);
-            tools.web_search_exa = createOpenAiSearchTool(this.AFFiNEConfig);
-            tools.web_search_gpt = createOpenAiSearchTool(this.AFFiNEConfig);
+            tools.web_search_exa = createWebSearchTool(this.AFFiNEConfig);
             tools.web_crawl_exa = createExaCrawlTool(this.AFFiNEConfig);
             break;
           }

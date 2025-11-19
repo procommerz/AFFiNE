@@ -91,3 +91,4 @@ af.cmd
 
 # playwright
 storageState.json
+.nvmrc

@@ -8,6 +8,7 @@ import {
   AnthropicOfficialConfig,
   AnthropicVertexConfig,
 } from './providers/anthropic';
+import { CopilotExtrasConfig } from './providers/copilot-extras';
 import type { FalConfig } from './providers/fal';
 import { GeminiGenerativeConfig, GeminiVertexConfig } from './providers/gemini';
 import { MorphConfig } from './providers/morph';
@@ -26,6 +27,7 @@ declare global {
       }>;
       storage: ConfigItem<StorageProviderConfig>;
       scenarios: ConfigItem<CopilotPromptScenario>;
+      extras: ConfigItem<CopilotExtrasConfig>;
       providers: {
         openai: ConfigItem<OpenAIConfig>;
         fal: ConfigItem<FalConfig>;
@@ -61,6 +63,12 @@ defineModuleConfig('copilot', {
         quick_text_generation: 'gpt-5-mini',
         polish_and_summarize: 'gpt-5',
       },
+    },
+  },
+  extras: {
+    desc: 'The config for the copilot extras.',
+    default: {
+      webSearchModule: 'gpt',
     },
   },
   'providers.openai': {

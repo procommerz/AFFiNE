@@ -273,6 +273,10 @@
       "type": "Object",
       "desc": "Use custom models in scenarios and override default settings."
     },
+    "extras": {
+      "type": "Object",
+      "desc": "Additional AI feature settings."
+    },
     "providers.openai": {
       "type": "Object",
       "desc": "The config for the openai provider.",
