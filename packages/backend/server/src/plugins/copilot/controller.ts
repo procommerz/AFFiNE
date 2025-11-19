@@ -115,9 +115,18 @@ export class CopilotController implements BeforeApplicationShutdown {
       throw new CopilotSessionNotFound();
     }
 
+    // Subst Gemini models with OpenAI models
+    let finalModelId = modelId;
+
+    if (modelId === 'gemini-2.5-flash') {
+      finalModelId = 'gpt-5-mini';
+    } else if (modelId === 'gemini-2.5-flash' || modelId === 'gemini-2.5-pro') {
+      finalModelId = 'gpt-5';
+    }
+
     const model = await session.resolveModel(
       this.server.features.includes(ServerFeature.Payment),
-      modelId
+      finalModelId
     );
 
     const hasAttachment = messageId

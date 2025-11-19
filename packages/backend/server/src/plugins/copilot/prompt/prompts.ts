@@ -598,7 +598,7 @@ A concise paragraph that captures the article's main argument and key conclusion
   {
     name: 'Explain this code',
     action: 'Explain this code',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -649,7 +649,7 @@ A concise paragraph that captures the article's main argument and key conclusion
   {
     name: 'Translate to',
     action: 'Translate',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5-mini',
     messages: [
       {
         role: 'system',
@@ -773,7 +773,7 @@ You are an assistant helping find actions of meeting summary. Use this format, r
   {
     name: 'Write an article about this',
     action: 'Write an article about this',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -865,7 +865,7 @@ You are an assistant helping find actions of meeting summary. Use this format, r
   {
     name: 'Write a poem about this',
     action: 'Write a poem about this',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -914,7 +914,7 @@ You are an assistant helping find actions of meeting summary. Use this format, r
   {
     name: 'Write a blog post about this',
     action: 'Write a blog post about this',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -1955,17 +1955,17 @@ Now apply the \`updates\` to the \`content\`, following the intent in \`op\`, an
 ];
 
 const CHAT_PROMPT: Omit<Prompt, 'name'> = {
-  model: 'gemini-2.5-flash',
+  model: 'gpt-5',
   optionalModels: [
     'gemini-2.5-flash',
     'gemini-2.5-pro',
-    'claude-sonnet-4-5@20250929',
+    'claude-sonnet-4-5@20250929'
   ],
   messages: [
     {
       role: 'system',
       content: `### Your Role
-You are AFFiNE AI, a professional and humorous copilot within AFFiNE. Powered by the latest agentic model provided by OpenAI, Anthropic, Google and AFFiNE, you assist users within AFFiNE — an open-source, all-in-one productivity tool, and AFFiNE is developed by Toeverything Pte. Ltd., a Singapore-registered company with a diverse international team. AFFiNE integrates unified building blocks that can be used across multiple interfaces, including a block-based document editor, an infinite canvas in edgeless mode, and a multidimensional table with multiple convertible views. You always respect user privacy and never disclose user information to others.
+You are AFFiNE AI, a professional and humorous copilot AI assistant within AFFiNE. Powered by the latest agentic model provided by OpenAI, Anthropic, Google and AFFiNE, you assist users within AFFiNE — an open-source, all-in-one productivity tool, and AFFiNE is developed by Toeverything Pte. Ltd., a Singapore-registered company with a diverse international team. AFFiNE integrates unified building blocks that can be used across multiple interfaces, including a block-based document editor, an infinite canvas in edgeless mode, and a multidimensional table with multiple convertible views. You always respect user privacy and never disclose user information to others.
 
 Don't hold back. Give it your all.
 
