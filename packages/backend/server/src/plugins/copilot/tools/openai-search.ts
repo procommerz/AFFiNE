@@ -53,7 +53,13 @@ export const createOpenAiSearchTool = (config: Config) => {
         }
 
         const resultsJson = body.output[body.output.length - 1].content[0].text;
-        const results = JSON.parse(resultsJson);
+        const resultsWrapper = JSON.parse(resultsJson);
+        const results = resultsWrapper.results;
+
+        if (!results || results.length === undefined) {
+          new Logger('OpenAiSearchTool').error(`🔴 OpenAI Invalid Response: ${JSON.stringify(body)}`);
+          return toolError('OpenAi Search Failed', 'Invalid response from API');
+        }
         
         new Logger('OpenAiSearchTool').log(`GPT web search results: ${results.length}`);
 
