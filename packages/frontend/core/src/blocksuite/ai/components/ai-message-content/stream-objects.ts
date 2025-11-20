@@ -26,6 +26,7 @@ export class ChatContentStreamObjects extends WithDisposable(
       margin: 8px 0;
       border-radius: 8px;
       background-color: rgba(0, 0, 0, 0.05);      
+      opacity: 0.8;
     }
 
     .reasoning-wrapper affine-paragraph {
