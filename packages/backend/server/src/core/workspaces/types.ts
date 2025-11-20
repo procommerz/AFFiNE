@@ -89,6 +89,9 @@ export class WorkspaceType extends WorkspaceFeatureType {
     description: 'Members of workspace',
   })
   members!: InviteUserType[];
+
+  @Field({ description: 'Workspace AI Identity' })
+  aiIdentity!: string;
 }
 
 @ObjectType()
@@ -130,7 +133,7 @@ export class InvitationType {
 @InputType()
 export class UpdateWorkspaceInput extends PickType(
   PartialType(WorkspaceType),
-  ['public', 'enableAi', 'enableUrlPreview', 'enableDocEmbedding'],
+  ['public', 'enableAi', 'enableUrlPreview', 'enableDocEmbedding', 'aiIdentity'],
   InputType
 ) {
   @Field(() => ID)

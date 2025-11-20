@@ -99,6 +99,13 @@ export class Workspace extends Entity {
     undefined
   );
 
+  aiIdentity$ = LiveData.from(
+    yjsGetPath(this.rootYDoc.getMap('meta'), 'aiIdentity') as Observable<
+      string | undefined
+    >,
+    undefined
+  );
+
   setAvatar(avatar: string) {
     transact(
       this.rootYDoc,
@@ -114,6 +121,16 @@ export class Workspace extends Entity {
       this.rootYDoc,
       () => {
         this.rootYDoc.getMap('meta').set('name', name);
+      },
+      { force: true }
+    );
+  }
+
+  setAiIdentity(aiIdentity: string) {
+    transact(
+      this.rootYDoc,
+      () => {
+        this.rootYDoc.getMap('meta').set('aiIdentity', aiIdentity);
       },
       { force: true }
     );

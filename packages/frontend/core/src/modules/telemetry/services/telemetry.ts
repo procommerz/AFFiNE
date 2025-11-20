@@ -47,23 +47,23 @@ export class TelemetryService extends Service {
     const unsubscribe = this.currentAccount$.subscribe(
       ({ account, selfHosted }) => {
         if (prevAccount) {
-          mixpanel.reset();
+          // mixpanel.reset();
         }
         // the isSelfHosted property from environment is not reliable
         if (selfHosted !== prevSelfHosted) {
-          mixpanel.register({
-            isSelfHosted: selfHosted,
-          });
+          // mixpanel.register({
+          //   isSelfHosted: selfHosted,
+          // });
         }
         prevSelfHosted = selfHosted;
         prevAccount = account ?? null;
         if (account) {
-          mixpanel.identify(account.id);
-          mixpanel.people.set({
-            $email: account.email,
-            $name: account.label,
-            $avatar: account.avatar,
-          });
+          // mixpanel.identify(account.id);
+          // mixpanel.people.set({
+          //   $email: account.email,
+          //   $name: account.label,
+          //   $avatar: account.avatar,
+          // });
         }
       }
     );
@@ -78,13 +78,13 @@ export class TelemetryService extends Service {
 
   registerMiddlewares() {
     this.disposables.push(
-      mixpanel.middleware((_event, parameters) => {
-        const extraContext = this.extractGlobalContext();
-        return {
-          ...extraContext,
-          ...parameters,
-        };
-      })
+      // mixpanel.middleware((_event, parameters) => {
+      //   const extraContext = this.extractGlobalContext();
+      //   return {
+      //     ...extraContext,
+      //     ...parameters,
+      //   };
+      // })
     );
   }
 

@@ -2081,6 +2081,9 @@ input UpdateUserSettingsInput {
 }
 
 input UpdateWorkspaceInput {
+  """Workspace AI Identity"""
+  aiIdentity: String
+
   """Enable AI"""
   enableAi: Boolean
 
@@ -2285,6 +2288,9 @@ type WorkspaceRolePermissions {
 type WorkspaceType {
   """Search a specific table with aggregate"""
   aggregate(input: AggregateInput!): AggregateResultObjectType!
+
+  """Workspace AI Identity"""
+  aiIdentity: String!
 
   """List blobs of workspace"""
   blobs: [ListedBlob!]!

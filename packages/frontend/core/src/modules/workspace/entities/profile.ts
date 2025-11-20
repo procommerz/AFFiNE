@@ -25,6 +25,7 @@ export interface WorkspaceProfileInfo {
   isAdmin?: boolean;
   isTeam?: boolean;
   isEmpty?: boolean;
+  aiIdentity?: string;
 }
 
 /**
@@ -46,7 +47,8 @@ export class WorkspaceProfile extends Entity<{ metadata: WorkspaceMetadata }> {
 
   avatar$ = this.profile$.map(v => v?.avatar);
   name$ = this.profile$.map(v => v?.name);
-
+  aiIdentity$ = this.profile$.map(v => v?.aiIdentity);
+  
   isLoading$ = new LiveData(false);
 
   constructor(
@@ -100,6 +102,10 @@ export class WorkspaceProfile extends Entity<{ metadata: WorkspaceMetadata }> {
     workspace.avatar$.subscribe(avatar => {
       const old = this.profile$.value;
       this.setProfile({ ...old, avatar: avatar ?? old?.avatar });
+    });
+    workspace.aiIdentity$.subscribe(aiIdentity => {
+      const old = this.profile$.value;
+      this.setProfile({ ...old, aiIdentity: aiIdentity ?? old?.aiIdentity });
     });
   }
 }

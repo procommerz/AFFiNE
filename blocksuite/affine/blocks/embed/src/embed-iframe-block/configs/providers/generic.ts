@@ -16,6 +16,7 @@ const AFFINE_DOMAINS = [
   'affine.fail', // Canary cloud domain
   'toeverything.app', // Safety measure for potential future use
   'apple.getaffineapp.com', // Cloud domain for Apple app
+  'notes.wrobo.io'
 ];
 
 /**

@@ -134,6 +134,8 @@ model Workspace {
   comments           Comment[]
   commentAttachments CommentAttachment[]
 
+  aiIdentity         String? @db.Text
+
   @@index([lastCheckEmbeddings])
   @@map("workspaces")
 }

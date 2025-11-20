@@ -2995,6 +2995,8 @@ export interface WorkspaceType {
   subscription: Maybe<SubscriptionType>;
   /** if workspace is team workspace */
   team: Scalars['Boolean']['output'];
+  /** Workspace AI Identity */
+  aiIdentity: Scalars['String']['output'];
 }
 
 export interface WorkspaceTypeAggregateArgs {
@@ -6191,6 +6193,16 @@ export type SetEnableAiMutation = {
   updateWorkspace: { __typename?: 'WorkspaceType'; id: string };
 };
 
+export type SetAiIdentityMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  aiIdentity: Scalars['String']['input'];
+}>;
+
+export type SetAiIdentityMutation = {
+  __typename?: 'Mutation';
+  updateWorkspace: { __typename?: 'WorkspaceType'; id: string };
+};
+
 export type SetEnableDocEmbeddingMutationVariables = Exact<{
   id: Scalars['ID']['input'];
   enableDocEmbedding: Scalars['Boolean']['input'];
@@ -7178,6 +7190,11 @@ export type Mutations =
       name: 'setEnableAiMutation';
       variables: SetEnableAiMutationVariables;
       response: SetEnableAiMutation;
+    }
+  | {
+      name: 'setAiIdentityMutation';
+      variables: SetAiIdentityMutationVariables;
+      response: SetAiIdentityMutation;
     }
   | {
       name: 'setEnableDocEmbeddingMutation';

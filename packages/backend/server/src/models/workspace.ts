@@ -25,6 +25,7 @@ export type UpdateWorkspaceInput = Pick<
   | 'avatarKey'
   | 'indexed'
   | 'lastCheckEmbeddings'
+  | 'aiIdentity'
 >;
 
 @Injectable()

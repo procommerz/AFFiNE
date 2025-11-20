@@ -61,6 +61,7 @@ import { CopilotStorage } from './storage';
 import { ChatMessage, ChatQuerySchema } from './types';
 import { getSignal, getTools } from './utils';
 import { CopilotWorkflowService, GraphExecutorState } from './workflow';
+import { Models } from '../../models';
 
 export interface ChatEvent {
   type: 'event' | 'attachment' | 'message' | 'error' | 'ping';
@@ -82,7 +83,8 @@ export class CopilotController implements BeforeApplicationShutdown {
     private readonly context: CopilotContextService,
     private readonly provider: CopilotProviderFactory,
     private readonly workflow: CopilotWorkflowService,
-    private readonly storage: CopilotStorage
+    private readonly storage: CopilotStorage,
+    private readonly models: Models
   ) {}
 
   async beforeApplicationShutdown() {
@@ -219,6 +221,31 @@ export class CopilotController implements BeforeApplicationShutdown {
     );
 
     const context = await this.context.getBySessionId(sessionId);
+    const workspaceId = session.config.workspaceId;
+    const workspace = await this.models.workspace.get(workspaceId);
+    
+    let workspaceAiIdentity = null;
+
+    if (workspace) {
+      workspaceAiIdentity = workspace.aiIdentity ?? undefined;      
+
+      if (!workspaceAiIdentity) {
+        workspaceAiIdentity = `You are AFFiNE AI, a professional and humorous copilot AI assistant within AFFiNE. You assist users within AFFiNE — an open-source, all-in-one productivity tool. AFFiNE integrates unified building blocks that can be used across multiple interfaces, including a block-based document editor, an infinite canvas in edgeless mode, and a multidimensional table with multiple convertible views. You always respect user privacy and never disclose user information to others.
+
+Don't hold back. Give it your all.
+`;
+      }
+
+      if (workspaceAiIdentity) {
+        params = Object.assign({}, params, {
+          workspaceAiIdentity,
+        });
+      }
+    }
+
+
+    // const workspace = await this.context.get()
+
     const contextParams =
       (Array.isArray(context?.files) && context.files.length > 0) ||
       (Array.isArray(context?.blobs) && context.blobs.length > 0)

@@ -2394,6 +2394,16 @@ export const setEnableAiMutation = {
 }`,
 };
 
+export const setAiIdentityMutation = {
+  id: 'setAiIdentityMutation' as const,
+  op: 'setAiIdentity',
+  query: `mutation setAiIdentity($id: ID!, $aiIdentity: String!) {
+  updateWorkspace(input: {id: $id, aiIdentity: $aiIdentity}) {
+    id
+  }
+}`,
+};
+
 export const setEnableDocEmbeddingMutation = {
   id: 'setEnableDocEmbeddingMutation' as const,
   op: 'setEnableDocEmbedding',

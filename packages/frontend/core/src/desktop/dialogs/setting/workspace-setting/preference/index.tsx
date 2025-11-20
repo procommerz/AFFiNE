@@ -19,6 +19,8 @@ import { ProfilePanel } from './profile';
 import { SharingPanel } from './sharing';
 import { TemplateDocSetting } from './template';
 import type { WorkspaceSettingDetailProps } from './types';
+import { Input } from '@affine/component';
+import { AiSetting } from './ai';
 
 export const WorkspaceSettingDetail = ({
   onCloseSetting,
@@ -63,7 +65,9 @@ export const WorkspaceSettingDetail = ({
         </SettingRow>
       </SettingWrapper>
       <TemplateDocSetting />
-      <SharingPanel />
+      <SharingPanel />      
+      <AiSetting />
+
       <SettingWrapper>
         <DeleteLeaveWorkspace onCloseSetting={onCloseSetting} />
         <SettingRow
