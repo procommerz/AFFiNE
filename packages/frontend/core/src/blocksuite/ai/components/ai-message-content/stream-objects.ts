@@ -25,7 +25,11 @@ export class ChatContentStreamObjects extends WithDisposable(
       padding: 16px 20px;
       margin: 8px 0;
       border-radius: 8px;
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgba(0, 0, 0, 0.05);      
+    }
+
+    .reasoning-wrapper affine-paragraph {
+      font-size: 13px;
     }
   `;
 
