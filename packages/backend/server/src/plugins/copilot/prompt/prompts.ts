@@ -125,7 +125,7 @@ const workflows: Prompt[] = [
   {
     name: 'workflow:presentation:step2',
     action: 'workflow:presentation:step2',
-    model: 'gpt-4o-2024-08-06',
+    model: 'gpt-4o',
     messages: [
       {
         role: 'system',
@@ -144,7 +144,7 @@ const workflows: Prompt[] = [
   {
     name: 'workflow:presentation:step4',
     action: 'workflow:presentation:step4',
-    model: 'gpt-4o-2024-08-06',
+    model: 'gpt-4o',
     messages: [
       {
         role: 'system',
@@ -188,7 +188,7 @@ const workflows: Prompt[] = [
   {
     name: 'workflow:brainstorm:step2',
     action: 'workflow:brainstorm:step2',
-    model: 'gpt-4o-2024-08-06',
+    model: 'gpt-4o',
     config: {
       frequencyPenalty: 0.5,
       presencePenalty: 0.5,
@@ -965,7 +965,7 @@ You are an assistant helping find actions of meeting summary. Use this format, r
   {
     name: 'Write outline',
     action: 'Write outline',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -1039,7 +1039,7 @@ You are an assistant helping find actions of meeting summary. Use this format, r
   {
     name: 'Brainstorm ideas about this',
     action: 'Brainstorm ideas about this',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -1133,7 +1133,7 @@ You are an assistant helping find actions of meeting summary. Use this format, r
   {
     name: 'Improve writing for it',
     action: 'Improve writing for it',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -1205,7 +1205,7 @@ The output must be perfect. Adherence to every detail of these instructions is n
   {
     name: 'Fix spelling for it',
     action: 'Fix spelling for it',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5-mini',
     messages: [
       {
         role: 'system',
@@ -1359,7 +1359,7 @@ If there are items in the content that can be used as to-do tasks, please refer 
   {
     name: 'Create headings',
     action: 'Create headings',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5-mini',
     messages: [
       {
         role: 'system',
@@ -1467,7 +1467,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Make it longer',
     action: 'Make it longer',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
@@ -1492,7 +1492,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Make it shorter',
     action: 'Make it shorter',
-    model: 'gemini-2.5-flash',
+    model: 'gpt-5-mini',
     messages: [
       {
         role: 'system',
@@ -1575,7 +1575,7 @@ When sent new notes, respond ONLY with the contents of the html file.`,
   {
     name: 'Section Edit',
     action: 'Section Edit',
-    model: 'claude-sonnet-4@20250514',
+    model: 'gpt-5',
     messages: [
       {
         role: 'system',
