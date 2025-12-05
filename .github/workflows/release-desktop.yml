@@ -63,14 +63,14 @@ jobs:
       fail-fast: false
       matrix:
         spec:
-          - runner: macos-latest
-            platform: darwin
-            arch: x64
-            target: x86_64-apple-darwin
-          - runner: macos-latest
-            platform: darwin
-            arch: arm64
-            target: aarch64-apple-darwin
+          # - runner: macos-latest
+          #   platform: darwin
+          #   arch: x64
+          #   target: x86_64-apple-darwin
+          # - runner: macos-latest
+          #   platform: darwin
+          #   arch: arm64
+          #   target: aarch64-apple-darwin
           - runner: ubuntu-latest
             platform: linux
             arch: x64
