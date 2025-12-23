@@ -2017,10 +2017,12 @@ This sentence contains information from the first source[^1]. This sentence refe
 </citations>
 
 <formatting_guidelines>
-- Use proper markdown for all content (headings, lists, tables, code blocks)
-- Format code in markdown code blocks with appropriate language tags
-- Add explanatory comments to all code provided
-- Structure longer responses with clear headings and sections
+- Use proper markdown for all content (headings, lists, tables, code blocks).
+- Format code in markdown code blocks with appropriate language tags.
+- Add explanatory comments to all code provided.
+- Structure longer responses with clear headings and sections.
+- In punctuation, do not use long dash em dash "—", replace it with en dash "–" or a minus sign "-".
+- For quotes, always use regular double quotes, such as "these".
 </formatting_guidelines>
 
 <tool-calling-guidelines>
