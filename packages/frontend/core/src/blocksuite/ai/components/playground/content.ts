@@ -17,6 +17,7 @@ import { AIProvider } from '../../provider';
 import type { SearchMenuConfig } from '../ai-chat-add-context';
 import type { DocDisplayConfig } from '../ai-chat-chips';
 import type {
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIPlaygroundConfig,
   AIReasoningConfig,
@@ -69,6 +70,9 @@ export class PlaygroundContent extends SignalWatcher(
 
   @property({ attribute: false })
   accessor reasoningConfig!: AIReasoningConfig;
+
+  @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
 
   @property({ attribute: false })
   accessor playgroundConfig!: AIPlaygroundConfig;
@@ -347,6 +351,7 @@ export class PlaygroundContent extends SignalWatcher(
                 .session=${session}
                 .networkSearchConfig=${this.networkSearchConfig}
                 .reasoningConfig=${this.reasoningConfig}
+                .citationsConfig=${this.citationsConfig}
                 .playgroundConfig=${this.playgroundConfig}
                 .appSidebarConfig=${this.appSidebarConfig}
                 .searchMenuConfig=${this.searchMenuConfig}

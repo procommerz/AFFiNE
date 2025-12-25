@@ -8,6 +8,7 @@ import {
   configureAINetworkSearchModule,
   configureAIPlaygroundModule,
   configureAIReasoningModule,
+  configureAICitationsModule,
   configureAIToolsConfigModule,
 } from './ai-button';
 import { configureAppSidebarModule } from './app-sidebar';
@@ -116,6 +117,7 @@ export function configureCommonModules(framework: Framework) {
   configureCommonGlobalStorageImpls(framework);
   configureAINetworkSearchModule(framework);
   configureAIReasoningModule(framework);
+  configureAICitationsModule(framework);
   configureAIPlaygroundModule(framework);
   configureAIButtonModule(framework);
   configureAIDraftModule(framework);

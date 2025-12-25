@@ -23,6 +23,7 @@ import {
   CloudWorkspaceIcon,
   DoneIcon,
   LockIcon,
+  QuoteIcon,
   ThinkingIcon,
   WebIcon,
 } from '@blocksuite/icons/lit';
@@ -100,6 +101,16 @@ export class ChatInputPreference extends SignalWatcher(
     | ((extendedThinking: boolean) => void)
     | undefined;
   // --------- extended thinking props end ---------
+
+  // --------- citations props start ---------
+  @property({ attribute: false })
+  accessor citations: boolean = false;
+
+  @property({ attribute: false })
+  accessor onCitationsChange:
+    | ((citations: boolean) => void)
+    | undefined;
+  // --------- citations props end ---------
 
   // --------- search props start ---------
   @property({ attribute: false })
@@ -202,6 +213,16 @@ export class ChatInputPreference extends SignalWatcher(
         prefix: ThinkingIcon(),
         on: this.extendedThinking,
         onChange: (value: boolean) => this.onExtendedThinkingChange?.(value),
+        class: { 'preference-action': true },
+      })
+    );
+
+    modelItems.push(
+      menu.toggleSwitch({
+        name: 'Citations',
+        prefix: QuoteIcon(),
+        on: this.citations,
+        onChange: (value: boolean) => this.onCitationsChange?.(value),
         class: { 'preference-action': true },
       })
     );

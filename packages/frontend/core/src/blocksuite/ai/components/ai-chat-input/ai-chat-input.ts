@@ -35,6 +35,7 @@ import {
 } from '../ai-chat-messages';
 import type {
   AIChatInputContext,
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIReasoningConfig,
 } from './type';
@@ -357,6 +358,9 @@ export class AIChatInput extends SignalWatcher(
   accessor reasoningConfig!: AIReasoningConfig;
 
   @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
+
+  @property({ attribute: false })
   accessor docDisplayConfig!: DocDisplayConfig;
 
   @property({ attribute: false })
@@ -410,6 +414,10 @@ export class AIChatInput extends SignalWatcher(
 
   private get _isReasoningActive() {
     return !!this.reasoningConfig.enabled.value;
+  }
+
+  private get _isCitationsActive() {
+    return !!this.citationsConfig.enabled.value;
   }
 
   override connectedCallback() {
@@ -535,7 +543,9 @@ export class AIChatInput extends SignalWatcher(
         <chat-input-preference
           .session=${this.session}
           .extendedThinking=${this._isReasoningActive}
-          .onExtendedThinkingChange=${this._toggleReasoning}
+          .onExtendedThinkingChange=${this._toggleReasoning}          
+          .citations=${this._isCitationsActive}
+          .onCitationsChange=${this._toggleCitations}
           .networkSearchVisible=${!!this.networkSearchConfig.visible.value}
           .isNetworkActive=${this._isNetworkActive}
           .onNetworkActiveChange=${this._toggleNetworkSearch}
@@ -642,6 +652,10 @@ export class AIChatInput extends SignalWatcher(
     this.reasoningConfig.setEnabled(extendedThinking);
   };
 
+  private readonly _toggleCitations = (citations: boolean) => {
+    this.citationsConfig.setEnabled(citations);
+  }
+
   private readonly _handleImageRemove = (index: number) => {
     const oldImages = this.chatContextValue.images;
     const newImages = oldImages.filter((_, i) => i !== index);
@@ -734,6 +748,7 @@ export class AIChatInput extends SignalWatcher(
         control: this.trackOptions?.control,
         webSearch: this._isNetworkActive,
         reasoning: this._isReasoningActive,
+        citations: this._isCitationsActive,
         toolsConfig: this.aiToolsConfigService.config.value,
         modelId,
       });

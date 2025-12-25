@@ -17,6 +17,7 @@ import { property } from 'lit/decorators.js';
 import type { SearchMenuConfig } from '../components/ai-chat-add-context';
 import type { DocDisplayConfig } from '../components/ai-chat-chips';
 import type {
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIPlaygroundConfig,
   AIReasoningConfig,
@@ -87,6 +88,9 @@ export class AIChatPanelTitle extends SignalWatcher(
   accessor reasoningConfig!: AIReasoningConfig;
 
   @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
+
+  @property({ attribute: false })
   accessor searchMenuConfig!: SearchMenuConfig;
 
   @property({ attribute: false })
@@ -144,6 +148,7 @@ export class AIChatPanelTitle extends SignalWatcher(
         .doc=${this.doc}
         .networkSearchConfig=${this.networkSearchConfig}
         .reasoningConfig=${this.reasoningConfig}
+        .citationsConfig=${this.citationsConfig}
         .playgroundConfig=${this.playgroundConfig}
         .appSidebarConfig=${this.appSidebarConfig}
         .searchMenuConfig=${this.searchMenuConfig}

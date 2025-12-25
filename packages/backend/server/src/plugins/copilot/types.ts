@@ -39,6 +39,7 @@ export const ChatQuerySchema = z
     retry: zBool,
     reasoning: zBool,
     webSearch: zBool,
+    citations: zBool,
     toolsConfig: ToolsConfigSchema,
   })
   .catchall(z.string())
@@ -49,6 +50,7 @@ export const ChatQuerySchema = z
       retry,
       reasoning,
       webSearch,
+      citations,
       toolsConfig,
       ...params
     }) => ({
@@ -57,6 +59,7 @@ export const ChatQuerySchema = z
       retry,
       reasoning,
       webSearch,
+      citations,
       toolsConfig,
       params,
     })

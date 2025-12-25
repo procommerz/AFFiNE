@@ -143,6 +143,7 @@ declare global {
       isRootSession?: boolean;
       webSearch?: boolean;
       reasoning?: boolean;
+      citations?: boolean;
       modelId?: string;
       toolsConfig?: AIToolsConfig | undefined;
       contexts?: {

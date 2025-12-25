@@ -41,6 +41,7 @@ import { type AIChatBlockModel } from '../blocks';
 import type { SearchMenuConfig } from '../components/ai-chat-add-context';
 import type { DocDisplayConfig } from '../components/ai-chat-chips';
 import type {
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIReasoningConfig,
 } from '../components/ai-chat-input';
@@ -97,6 +98,10 @@ export class AIChatBlockPeekView extends LitElement {
 
   private get _isReasoningActive() {
     return !!this.reasoningConfig.enabled.value;
+  }
+
+  private get _isCitationsActive() {
+    return !!this.citationsConfig.enabled.value;
   }
 
   private _textRendererOptions: TextRendererOptions = {};
@@ -401,6 +406,7 @@ export class AIChatBlockPeekView extends LitElement {
         where: 'ai-chat-block',
         control: 'chat-send',
         reasoning: this._isReasoningActive,
+        citations: this._isCitationsActive,
         webSearch: this._isNetworkActive,
         toolsConfig: this.aiToolsConfigService.config.value,
       });
@@ -627,6 +633,7 @@ export class AIChatBlockPeekView extends LitElement {
         }}
         .portalContainer=${this.parentElement}
         .reasoningConfig=${this.reasoningConfig}
+        .citationsConfig=${this.citationsConfig}
         .serverService=${this.serverService}
         .subscriptionService=${this.subscriptionService}
         .aiModelService=${this.aiModelService}
@@ -649,6 +656,9 @@ export class AIChatBlockPeekView extends LitElement {
 
   @property({ attribute: false })
   accessor reasoningConfig!: AIReasoningConfig;
+
+  @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
 
   @property({ attribute: false })
   accessor serverService!: ServerService;
@@ -715,6 +725,7 @@ export const AIChatBlockPeekViewTemplate = (
   searchMenuConfig: SearchMenuConfig,
   networkSearchConfig: AINetworkSearchConfig,
   reasoningConfig: AIReasoningConfig,
+  citationsConfig: AICitationsConfig,
   serverService: ServerService,
   affineFeatureFlagService: FeatureFlagService,
   affineWorkspaceDialogService: WorkspaceDialogService,
@@ -730,7 +741,8 @@ export const AIChatBlockPeekViewTemplate = (
     .networkSearchConfig=${networkSearchConfig}
     .docDisplayConfig=${docDisplayConfig}
     .searchMenuConfig=${searchMenuConfig}
-    .reasoningConfig=${reasoningConfig}
+    .reasoningConfig=${reasoningConfig}    
+    .citationsConfig=${citationsConfig}
     .serverService=${serverService}
     .affineFeatureFlagService=${affineFeatureFlagService}
     .affineWorkspaceDialogService=${affineWorkspaceDialogService}

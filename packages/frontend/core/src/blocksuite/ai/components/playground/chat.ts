@@ -26,6 +26,7 @@ import type { SearchMenuConfig } from '../ai-chat-add-context';
 import type { DocDisplayConfig } from '../ai-chat-chips';
 import type { ChatContextValue } from '../ai-chat-content';
 import type {
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIPlaygroundConfig,
   AIReasoningConfig,
@@ -152,6 +153,9 @@ export class PlaygroundChat extends SignalWatcher(
 
   @property({ attribute: false })
   accessor reasoningConfig!: AIReasoningConfig;
+
+  @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
 
   @property({ attribute: false })
   accessor playgroundConfig!: AIPlaygroundConfig;
@@ -361,6 +365,7 @@ export class PlaygroundChat extends SignalWatcher(
         .aiToolsConfigService=${this.aiToolsConfigService}
         .networkSearchConfig=${this.networkSearchConfig}
         .reasoningConfig=${this.reasoningConfig}
+        .citationsConfig=${this.citationsConfig}
         .messages=${this.messages}
       ></ai-chat-messages>
       <ai-chat-composer
@@ -374,6 +379,7 @@ export class PlaygroundChat extends SignalWatcher(
         .onEmbeddingProgressChange=${this.onEmbeddingProgressChange}
         .networkSearchConfig=${this.networkSearchConfig}
         .reasoningConfig=${this.reasoningConfig}
+        .citationsConfig=${this.citationsConfig}
         .playgroundConfig=${this.playgroundConfig}
         .docDisplayConfig=${this.docDisplayConfig}
         .searchMenuConfig=${this.searchMenuConfig}

@@ -1,4 +1,5 @@
 // packages/frontend/core/src/blocksuite/ai/hooks/useChatPanelConfig.ts
+import { AICitationsService } from '@affine/core/modules/ai-button/services/citations';
 import { AINetworkSearchService } from '@affine/core/modules/ai-button/services/network-search';
 import { AIPlaygroundService } from '@affine/core/modules/ai-button/services/playground';
 import { AIReasoningService } from '@affine/core/modules/ai-button/services/reasoning';
@@ -22,6 +23,7 @@ export function useAIChatConfig() {
 
   const searchService = framework.get(AINetworkSearchService);
   const reasoningService = framework.get(AIReasoningService);
+  const citationsService = framework.get(AICitationsService);
   const playgroundService = framework.get(AIPlaygroundService);
   const docDisplayMetaService = framework.get(DocDisplayMetaService);
   const workspaceService = framework.get(WorkspaceService);
@@ -40,6 +42,11 @@ export function useAIChatConfig() {
   const reasoningConfig = {
     enabled: reasoningService.enabled,
     setEnabled: reasoningService.setEnabled,
+  };
+
+  const citationsConfig = {
+    enabled: citationsService.enabled,
+    setEnabled: citationsService.setEnabled,
   };
 
   const playgroundConfig = {
@@ -128,6 +135,7 @@ export function useAIChatConfig() {
   return {
     networkSearchConfig,
     reasoningConfig,
+    citationsConfig,
     docDisplayConfig,
     searchMenuConfig,
     playgroundConfig,

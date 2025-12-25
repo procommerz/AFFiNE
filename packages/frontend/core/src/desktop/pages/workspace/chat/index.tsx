@@ -111,6 +111,7 @@ export const Component = () => {
     searchMenuConfig,
     networkSearchConfig,
     reasoningConfig,
+    citationsConfig,
   } = useAIChatConfig();
 
   const createSession = useCallback(
@@ -220,6 +221,7 @@ export const Component = () => {
     content.searchMenuConfig = searchMenuConfig;
     content.networkSearchConfig = networkSearchConfig;
     content.reasoningConfig = reasoningConfig;
+    content.citationsConfig = citationsConfig;
     content.onContextChange = onContextChange;
     content.affineFeatureFlagService = framework.get(FeatureFlagService);
     content.affineWorkspaceDialogService = framework.get(

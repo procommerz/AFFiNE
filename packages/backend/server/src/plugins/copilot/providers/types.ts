@@ -180,6 +180,7 @@ export const CopilotChatOptionsSchema = CopilotProviderOptionsSchema.merge(
   PromptConfigStrictSchema
 )
   .extend({
+    citations: z.boolean().optional(),
     reasoning: z.boolean().optional(),
     webSearch: z.boolean().optional(),
   })

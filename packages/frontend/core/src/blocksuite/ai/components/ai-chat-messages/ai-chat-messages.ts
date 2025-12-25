@@ -25,6 +25,7 @@ import { mergeStreamObjects } from '../../utils/stream-objects';
 import type { DocDisplayConfig } from '../ai-chat-chips';
 import { type ChatContextValue } from '../ai-chat-content/type';
 import type {
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIReasoningConfig,
 } from '../ai-chat-input';
@@ -203,6 +204,9 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
   accessor reasoningConfig!: AIReasoningConfig;
 
   @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
+
+  @property({ attribute: false })
   accessor width: Signal<number | undefined> | undefined;
 
   @property({ attribute: false })
@@ -233,6 +237,10 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
 
   private get _isReasoningActive() {
     return !!this.reasoningConfig.enabled.value;
+  }
+
+  private get _isCitationsActive() {
+    return !!this.citationsConfig.enabled.value;
   }
 
   private _renderAIOnboarding() {
@@ -470,6 +478,7 @@ export class AIChatMessages extends WithDisposable(ShadowlessElement) {
         control: 'chat-send',
         isRootSession: true,
         reasoning: this._isReasoningActive,
+        citations: this._isCitationsActive,
         webSearch: this._isNetworkActive,
         toolsConfig: this.aiToolsConfigService.config.value,
       });

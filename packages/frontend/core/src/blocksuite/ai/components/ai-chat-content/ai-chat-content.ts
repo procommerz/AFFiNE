@@ -34,6 +34,7 @@ import { extractSelectedContent } from '../../utils/extract';
 import type { SearchMenuConfig } from '../ai-chat-add-context';
 import type { DocDisplayConfig } from '../ai-chat-chips';
 import type {
+  AICitationsConfig,
   AINetworkSearchConfig,
   AIReasoningConfig,
 } from '../ai-chat-input';
@@ -144,6 +145,9 @@ export class AIChatContent extends SignalWatcher(
 
   @property({ attribute: false })
   accessor reasoningConfig!: AIReasoningConfig;
+
+  @property({ attribute: false })
+  accessor citationsConfig!: AICitationsConfig;
 
   @property({ attribute: false })
   accessor searchMenuConfig!: SearchMenuConfig;
@@ -452,6 +456,7 @@ export class AIChatContent extends SignalWatcher(
         .aiToolsConfigService=${this.aiToolsConfigService}
         .networkSearchConfig=${this.networkSearchConfig}
         .reasoningConfig=${this.reasoningConfig}
+        .citationsConfig=${this.citationsConfig}
         .width=${this.width}
         .independentMode=${this.independentMode}
         .messages=${this.messages}
@@ -476,6 +481,7 @@ export class AIChatContent extends SignalWatcher(
         .onEmbeddingProgressChange=${this.onEmbeddingProgressChange}
         .networkSearchConfig=${this.networkSearchConfig}
         .reasoningConfig=${this.reasoningConfig}
+        .citationsConfig=${this.citationsConfig}
         .docDisplayConfig=${this.docDisplayConfig}
         .searchMenuConfig=${this.searchMenuConfig}
         .serverService=${this.serverService}

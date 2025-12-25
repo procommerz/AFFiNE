@@ -15,6 +15,11 @@ export interface AIReasoningConfig {
   setEnabled: (state: boolean) => void;
 }
 
+export interface AICitationsConfig {
+  enabled: Signal<boolean | undefined>;
+  setEnabled: (state: boolean) => void;
+}
+
 export interface AIPlaygroundConfig {
   visible: Signal<boolean | undefined>;
 }

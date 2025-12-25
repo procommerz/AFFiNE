@@ -289,6 +289,9 @@ Don't hold back. Give it your all.
     const info: any = { sessionId, params: query };
 
     try {
+      const { reasoning, webSearch, toolsConfig, citations } =
+        ChatQuerySchema.parse(query);
+        
       const { provider, model, session, finalMessage } =
         await this.prepareChatSession(
           user,
@@ -300,9 +303,7 @@ Don't hold back. Give it your all.
       info.model = model;
       info.finalMessage = finalMessage.filter(m => m.role !== 'system');
       metrics.ai.counter('chat_calls').add(1, { model });
-
-      const { reasoning, webSearch, toolsConfig } =
-        ChatQuerySchema.parse(query);
+      
       const content = await provider.text({ modelId: model }, finalMessage, {
         ...session.config.promptConfig,
         signal: getSignal(req).signal,

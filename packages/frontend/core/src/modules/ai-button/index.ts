@@ -20,6 +20,7 @@ import { AINetworkSearchService } from './services/network-search';
 import { AIPlaygroundService } from './services/playground';
 import { AIReasoningService } from './services/reasoning';
 import { AIToolsConfigService } from './services/tools-config';
+import { AICitationsService } from './services/citations';
 
 export const configureAIButtonModule = (framework: Framework) => {
   framework.service(AIButtonService, container => {
@@ -36,6 +37,10 @@ export function configureAINetworkSearchModule(framework: Framework) {
 
 export function configureAIReasoningModule(framework: Framework) {
   framework.service(AIReasoningService, [GlobalStateService]);
+}
+
+export function configureAICitationsModule(framework: Framework) {
+  framework.service(AICitationsService, [GlobalStateService]);
 }
 
 export function configureAIPlaygroundModule(framework: Framework) {

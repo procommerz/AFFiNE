@@ -60,6 +60,7 @@ export const EditorChatPanel = forwardRef(function EditorChatPanel(
     searchMenuConfig,
     networkSearchConfig,
     reasoningConfig,
+    citationsConfig,
     playgroundConfig,
   } = useAIChatConfig();
   const confirmModal = useConfirmModal();
@@ -90,6 +91,7 @@ export const EditorChatPanel = forwardRef(function EditorChatPanel(
       chatPanelRef.current.searchMenuConfig = searchMenuConfig;
       chatPanelRef.current.networkSearchConfig = networkSearchConfig;
       chatPanelRef.current.reasoningConfig = reasoningConfig;
+      chatPanelRef.current.citationsConfig = citationsConfig;
       chatPanelRef.current.playgroundConfig = playgroundConfig;
       chatPanelRef.current.extensions = specs;
       chatPanelRef.current.serverService = framework.get(ServerService);
