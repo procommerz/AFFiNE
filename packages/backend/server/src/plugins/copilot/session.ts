@@ -287,7 +287,9 @@ export class ChatSession implements AsyncDisposable {
 
 type Session = NonNullable<
   Awaited<ReturnType<Models['copilotSession']['get']>>
->;
+> & {
+  enableCitations?: boolean | null;
+};
 
 type SessionHistory = ChatHistory & {
   prompt: ChatPrompt;
@@ -338,6 +340,7 @@ export class ChatSessionService {
       sessionId: session.id,
       tokens: session.tokenCost,
       messages: this.getMessage(session),
+      enableCitations: session.enableCitations || null,
 
       // prompt info
       prompt,

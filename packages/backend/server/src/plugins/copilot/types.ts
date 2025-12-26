@@ -87,6 +87,7 @@ export const ChatHistorySchema = z
     model: z.string(),
     optionalModels: z.array(z.string()),
     promptName: z.string(),
+    enableCitations: z.boolean().nullable(),
 
     tokens: z.number(),
     messages: z.array(ChatMessageSchema),

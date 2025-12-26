@@ -47,6 +47,7 @@ import {
 } from '../../base';
 import { ServerFeature, ServerService } from '../../core';
 import { CurrentUser, Public } from '../../core/auth';
+import { Models } from '../../models';
 import { CopilotContextService } from './context';
 import {
   CopilotProvider,
@@ -61,7 +62,6 @@ import { CopilotStorage } from './storage';
 import { ChatMessage, ChatQuerySchema } from './types';
 import { getSignal, getTools } from './utils';
 import { CopilotWorkflowService, GraphExecutorState } from './workflow';
-import { Models } from '../../models';
 
 export interface ChatEvent {
   type: 'event' | 'attachment' | 'message' | 'error' | 'ping';
@@ -202,7 +202,8 @@ export class CopilotController implements BeforeApplicationShutdown {
     user: CurrentUser,
     sessionId: string,
     query: Record<string, string | string[]>,
-    outputType: ModelOutputType
+    outputType: ModelOutputType,
+    citations?: boolean
   ) {
     let { messageId, retry, modelId, params } = ChatQuerySchema.parse(query);
 
@@ -223,6 +224,7 @@ export class CopilotController implements BeforeApplicationShutdown {
     const context = await this.context.getBySessionId(sessionId);
     const workspaceId = session.config.workspaceId;
     const workspace = await this.models.workspace.get(workspaceId);
+    const enableCitations = citations ?? false; // TODO: get from session params
     
     let workspaceAiIdentity = null;
 
@@ -239,6 +241,7 @@ Don't hold back. Give it your all.
       if (workspaceAiIdentity) {
         params = Object.assign({}, params, {
           workspaceAiIdentity,
+          enableCitations,
         });
       }
     }
@@ -297,7 +300,8 @@ Don't hold back. Give it your all.
           user,
           sessionId,
           query,
-          ModelOutputType.Text
+          ModelOutputType.Text,
+          citations
         );
 
       info.model = model;
@@ -312,6 +316,7 @@ Don't hold back. Give it your all.
         workspace: session.config.workspaceId,
         reasoning,
         webSearch,
+        citations,
         tools: getTools(session.config.promptConfig?.tools, toolsConfig),
       });
 
@@ -345,12 +350,16 @@ Don't hold back. Give it your all.
     const info: any = { sessionId, params: query, throwInStream: false };
 
     try {
+      const { messageId, reasoning, webSearch, toolsConfig, citations } =
+        ChatQuerySchema.parse(query);
+
       const { provider, model, session, finalMessage } =
         await this.prepareChatSession(
           user,
           sessionId,
           query,
-          ModelOutputType.Text
+          ModelOutputType.Text,
+          citations
         );
 
       info.model = model;
@@ -366,9 +375,6 @@ Don't hold back. Give it your all.
         }
       });
 
-      const { messageId, reasoning, webSearch, toolsConfig } =
-        ChatQuerySchema.parse(query);
-
       const source$ = from(
         provider.streamText({ modelId: model }, finalMessage, {
           ...session.config.promptConfig,
@@ -378,6 +384,7 @@ Don't hold back. Give it your all.
           workspace: session.config.workspaceId,
           reasoning,
           webSearch,
+          citations,
           tools: getTools(session.config.promptConfig?.tools, toolsConfig),
         })
       ).pipe(
@@ -438,13 +445,17 @@ Don't hold back. Give it your all.
   ): Promise<Observable<ChatEvent>> {
     const info: any = { sessionId, params: query, throwInStream: false };
 
+    const { messageId, reasoning, webSearch, toolsConfig, citations } =
+      ChatQuerySchema.parse(query);
+
     try {
       const { provider, model, session, finalMessage } =
         await this.prepareChatSession(
           user,
           sessionId,
           query,
-          ModelOutputType.Object
+          ModelOutputType.Object,
+          citations
         );
 
       info.model = model;
@@ -459,9 +470,6 @@ Don't hold back. Give it your all.
           endBeforePromiseResolve = true;
         }
       });
-
-      const { messageId, reasoning, webSearch, toolsConfig } =
-        ChatQuerySchema.parse(query);
 
       const source$ = from(
         provider.streamObject({ modelId: model }, finalMessage, {
@@ -536,7 +544,7 @@ Don't hold back. Give it your all.
   ): Promise<Observable<ChatEvent>> {
     const info: any = { sessionId, params: query, throwInStream: false };
     try {
-      let { messageId, params } = ChatQuerySchema.parse(query);
+      let { messageId, params, citations } = ChatQuerySchema.parse(query);
 
       const [, session] = await this.appendSessionMessage(sessionId, messageId);
       info.model = session.model;

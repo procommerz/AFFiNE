@@ -22,6 +22,7 @@ export type TextToTextOptions = {
   postfix?: (text: string) => string;
   reasoning?: boolean;
   webSearch?: boolean;
+  citations?: boolean;
   modelId?: string;
   toolsConfig?: AIToolsConfig;
 };
@@ -120,6 +121,7 @@ export function textToText({
   postfix,
   reasoning,
   webSearch,
+  citations,
   modelId,
   toolsConfig,
 }: TextToTextOptions) {
@@ -143,6 +145,7 @@ export function textToText({
             messageId,
             reasoning,
             webSearch,
+            citations,
             modelId,
             toolsConfig,
           },

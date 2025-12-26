@@ -83,7 +83,7 @@ export function setupAIProvider(
 
   //#region actions
   AIProvider.provide('chat', async options => {
-    const { input, contexts, webSearch } = options;
+    const { input, contexts, webSearch, citations } = options;
 
     const sessionId = await createSession({
       promptName: 'Chat With AFFiNE AI',
@@ -92,6 +92,7 @@ export function setupAIProvider(
     return textToText({
       ...options,
       modelId: options.modelId,
+      citations: citations,
       client,
       sessionId,
       content: input,

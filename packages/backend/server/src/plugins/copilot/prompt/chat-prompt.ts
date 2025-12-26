@@ -128,6 +128,7 @@ export class ChatPrompt {
       selectedSnapshot,
       html,
       workspaceAiIdentity,
+      enableCitations,
     } = params;
     return {
       'affine::date': new Date().toLocaleDateString(),
@@ -137,6 +138,7 @@ export class ChatPrompt {
       'affine::hasFilesRef': Array.isArray(files) && files.length > 0,
       'affine::hasSelected': !!selectedMarkdown || !!selectedSnapshot || !!html,
       'affine::workspaceAiIdentity': workspaceAiIdentity ?? '',
+      'affine::enableCitations': enableCitations ? true : false,
     };
   }
 
@@ -153,7 +155,7 @@ export class ChatPrompt {
     );
     const paramsAttach = Array.isArray(attach) ? attach : [];
 
-    return this.messages.map(
+    const messageList = this.messages.map(
       ({ attachments: attach, content, params: _, ...rest }) => {
         const result: PromptMessage = {
           ...rest,
@@ -163,6 +165,8 @@ export class ChatPrompt {
             Object.assign({}, restParams, this.preDefinedParams(restParams))
           ),
         };
+
+        console.log("🧐 Message content >>:", result.content);
 
         const attachments = [
           ...(Array.isArray(attach) ? attach : []),
@@ -174,5 +178,7 @@ export class ChatPrompt {
         return result;
       }
     );
+
+    return messageList;
   }
 }

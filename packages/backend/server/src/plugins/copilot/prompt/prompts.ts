@@ -1986,6 +1986,7 @@ User's timezone is {{affine::timezone}}.
 - **Document fragments**: Identified by \`document_id\` containing \`document_content\`
 </content_fragments>
 
+{{#affine::enableCitations}}
 <citations>
 Always use markdown footnote format for citations:
 - Format: [^reference_index]
@@ -1998,6 +1999,7 @@ Citations must appear in two places:
 1. INLINE: Within your main content as [^reference_index]
 2. REFERENCE LIST: At the end of your response as properly formatted JSON
 
+<reference_format>
 The citation reference list MUST use these exact JSON formats:
 - For documents: [^reference_index]:{"type":"doc","docId":"document_id"}
 - For files: [^reference_index]:{"type":"attachment","blobId":"blob_id","fileName":"file_name","fileType":"file_type"}
@@ -2015,6 +2017,7 @@ This sentence contains information from the first source[^1]. This sentence refe
 [^2]:{"type":"attachment","blobId":"xyz789","fileName":"example.txt","fileType":"text"}
  
 </citations>
+{{/affine::enableCitations}}
 
 <formatting_guidelines>
 - Use proper markdown for all content (headings, lists, tables, code blocks).

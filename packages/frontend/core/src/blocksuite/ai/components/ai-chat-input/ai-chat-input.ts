@@ -725,6 +725,7 @@ export class AIChatInput extends SignalWatcher(
           .value;
 
       const modelId = this.aiModelService.modelId.value;
+
       const stream = await AIProvider.actions.chat({
         sessionId,
         input: userInput,
@@ -751,7 +752,7 @@ export class AIChatInput extends SignalWatcher(
         citations: this._isCitationsActive,
         toolsConfig: this.aiToolsConfigService.config.value,
         modelId,
-      });
+      });      
 
       for await (const text of stream) {
         const messages = this.chatContextValue.messages.slice(0);

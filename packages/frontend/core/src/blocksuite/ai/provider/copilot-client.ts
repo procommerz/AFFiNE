@@ -451,6 +451,7 @@ export class CopilotClient {
       messageId,
       reasoning,
       webSearch,
+      citations,
       modelId,
       toolsConfig,
     }: {
@@ -458,6 +459,7 @@ export class CopilotClient {
       messageId?: string;
       reasoning?: boolean;
       webSearch?: boolean;
+      citations?: boolean;
       modelId?: string;
       toolsConfig?: AIToolsConfig;
     },
@@ -469,6 +471,7 @@ export class CopilotClient {
       reasoning,
       webSearch,
       modelId,
+      citations,
       toolsConfig,
     });
     if (queryString) {
